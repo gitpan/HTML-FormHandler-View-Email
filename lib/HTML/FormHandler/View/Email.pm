@@ -7,7 +7,7 @@ use Email::Simple;
 use Email::Simple::Creator;
 use Email::Sender::Transport::SMTP;
 
-our $VERSION = '0.04001';
+our $VERSION = '0.04101';
 
 extends 'HTML::FormHandler';
 
@@ -159,10 +159,14 @@ from - Sender email address, required.
 subject - Email subject, not required.
 
 mailer_args - Required only if using SMTP for delivery.
-    host - SMTP server address.
-    username - Valid username on the SMTP server, used for authentication.
-    password - Valid password, used for authentication.
-    port - Port number, defaults to 25.
+
+host - SMTP host address, required only if using SMTP for delivery.
+
+username - Valid username, used for authentication with the SMTP host, required only if using SMTP for delivery.
+
+password - Valid password, used for authentication with the SMTP host, required only if using SMTP for delivery.
+
+port - Port number, defaults to 25, required only if using SMTP for delivery.
 
 fields_list - You can specify a list of fields in an arrayref that you'd like to be emailed, not required:
 
