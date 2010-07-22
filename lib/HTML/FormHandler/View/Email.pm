@@ -7,7 +7,7 @@ use Email::Simple;
 use Email::Simple::Creator;
 use Email::Sender::Transport::SMTP;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04001';
 
 extends 'HTML::FormHandler';
 
@@ -15,7 +15,7 @@ sub email {
     my $self = shift;
     croak 'No params available' unless $self->params;
     my $body = $self->build_body;
-    $self->validate;
+    $self->validate_header;
     my $mail = $self->build_email($body);
     eval { $self->mailer_args; };
     if (!$@) {
@@ -98,7 +98,7 @@ sub match {
     return $match;
 }
 
-sub validate {
+sub validate_header {
     my $self = shift;
     eval { $self->to;
            $self->from;
@@ -149,6 +149,8 @@ In your Catalyst controller:
     return unless $form->email;
 
 =head1 ATTRIBUTES
+
+Set these in your form class:
 
 to - Delivery email address, required.
 
